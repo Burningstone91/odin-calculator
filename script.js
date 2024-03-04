@@ -94,6 +94,7 @@ buttons.forEach(button => {
       prevKeyType = "operator";
     }
 
+
     if (keyType === "all-clear") {
       prevKeyType = null;
       operator = null;
@@ -101,5 +102,17 @@ buttons.forEach(button => {
       num2 = null;
       display.value = 0;
     }
+
+    if (keyType === "equal") {
+      if (num1 === null || num2 === null || operator === null){
+        alert("You are missing a number or an operator!")
+      } else {
+        result = operate(Number(num1), Number(num2), operator);
+        display.value = result;
+        num1 = result;
+        num2 = null;
+      }
+    }
+
   })
 })
