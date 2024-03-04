@@ -1,7 +1,8 @@
 let num1 = 0;
 let num2 = 0;
 let operator;
-const digits = document.querySelectorAll(".digit");
+let prevKeyType = null;
+const buttons = document.querySelectorAll("button");
 const display = document.querySelector(".display");
 
 function add(num1, num2) {
@@ -27,10 +28,26 @@ function operate(num1, num2, operator) {
 num1 = 50;
 num2 = 5;
 
-digits.forEach(digit => {
-  digit.addEventListener("click", function handleClick(event) {
+buttons.forEach(button => {
+  button.addEventListener("click", function handleClick(event) {
     const key = event.target;
     const keyValue = key.textContent;
-    display.value += keyValue;
+    const keyType = key.className;
+
+    if (keyType === "digit") {
+      if (prevKeyType === "digit" || prevKeyType === null) {
+        if (display.value == "0") {
+          display.value = keyValue;
+        } else {
+          display.value += keyValue;
+        }
+      }
+    }
+
+
+    if (prevKeyType === "digit") {
+
+    }
+
   })
 })
