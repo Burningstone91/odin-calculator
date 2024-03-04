@@ -62,6 +62,11 @@ buttons.forEach(button => {
         num1 = result;
         num2 = null;
       } else {
+        // Remove operator if previous button was an operator
+        if (prevKeyType === "operator") {
+          display.value = display.value.substring(0, display.value.length - 3);
+        }
+
         display.value += " " + keyValue + " ";
       }
 
@@ -95,6 +100,3 @@ buttons.forEach(button => {
     }
   })
 })
-
-// press digit 
-// 
