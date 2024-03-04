@@ -86,9 +86,13 @@ buttons.forEach(button => {
       prevKeyType = "operator";
     }
 
-  console.log(num1);
-  console.log(num2);
-  console.log(prevKeyType)
+    if (keyType === "all-clear") {
+      prevKeyType = null;
+      operator = null;
+      num1 = null;
+      num2 = null;
+      display.value = 0;
+    }
   })
 })
 
