@@ -1,5 +1,5 @@
-let num1 = 0;
-let num2 = 0;
+let num1 = null;
+let num2 = null;
 let operator;
 let prevKeyType = null;
 const buttons = document.querySelectorAll("button");
@@ -25,9 +25,6 @@ function operate(num1, num2, operator) {
   return operator(num1, num2)
 }
 
-num1 = 50;
-num2 = 5;
-
 buttons.forEach(button => {
   button.addEventListener("click", function handleClick(event) {
     const key = event.target;
@@ -35,19 +32,48 @@ buttons.forEach(button => {
     const keyType = key.className;
 
     if (keyType === "digit") {
-      if (prevKeyType === "digit" || prevKeyType === null) {
-        if (display.value == "0") {
-          display.value = keyValue;
+      if (prevKeyType === null){
+        num1 = keyValue;
+      } else if (prevKeyType === "operator") {
+        num2 = keyValue;
+      } else if (prevKeyType === "digit") {
+        if (num2 === null) {
+          num1 += keyValue;
         } else {
-          display.value += keyValue;
+          num2 += keyValue;
         }
       }
+      
+      display.value === "0" ? display.value = keyValue : display.value += keyValue;
+      prevKeyType = "digit";
+
     }
 
+    if (keyType === "operator") {
+      switch (keyValue) {
+        case "%":
+          operator = remainder;
+          break;
+        case "÷":
+          operator = divide;
+          break;
+        case "+":
+          operator = add;
+          break;
+        case "-":
+          operator = subtract;
+          break;
+        case "x":
+          operator = multiply;
+          break;
+      }
 
-    if (prevKeyType === "digit") {
-
+      prevKeyType = "operator";
     }
+
 
   })
 })
+
+// press digit 
+// 
