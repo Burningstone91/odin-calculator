@@ -103,6 +103,7 @@ buttons.forEach(button => {
       display.value = 0;
     }
 
+
     if (keyType === "equal") {
       if (num1 === null || num2 === null || operator === null){
         alert("You are missing a number or an operator!")
@@ -111,6 +112,17 @@ buttons.forEach(button => {
         display.value = result;
         num1 = result;
         num2 = null;
+      }
+    }
+
+
+    if (keyType === "decimal") {
+      if (num2 === null && prevKeyType !== "operator" && !num1.includes(".")) {
+        display.value += keyValue;
+        num1 += keyValue;
+      } else if (num2 !== null && !num2.includes(".")) {
+        display.value += keyValue;
+        num2 += keyValue;
       }
     }
 
