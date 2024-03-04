@@ -29,6 +29,26 @@ function operate(num1, num2, operator) {
   return operator(num1, num2)
 }
 
+function operatorStringToFunction(operatorString) {
+  switch (operatorString) {
+    case "%":
+      operator = remainder;
+      break;
+    case "÷":
+      operator = divide;
+      break;
+    case "+":
+      operator = add;
+      break;
+    case "-":
+      operator = subtract;
+      break;
+    case "x":
+      operator = multiply;
+      break;
+    }
+}
+
 
 buttons.forEach(button => {
   button.addEventListener("click", function handleClick(event) {
@@ -70,24 +90,7 @@ buttons.forEach(button => {
         display.value += " " + keyValue + " ";
       }
 
-      switch (keyValue) {
-        case "%":
-          operator = remainder;
-          break;
-        case "÷":
-          operator = divide;
-          break;
-        case "+":
-          operator = add;
-          break;
-        case "-":
-          operator = subtract;
-          break;
-        case "x":
-          operator = multiply;
-          break;
-        }
-
+      operatorStringToFunction(keyValue);
       prevKeyType = "operator";
     }
 
