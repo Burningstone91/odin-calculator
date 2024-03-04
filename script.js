@@ -125,6 +125,39 @@ buttons.forEach(button => {
         num2 += keyValue;
       }
     }
-
   })
 })
+
+
+document.addEventListener("keydown", function handleKeyPress(event) {
+  const getOperator = {
+    "%": "remainder",
+    "÷": "divide",
+    "+": "add",
+    "-": "subtract",
+    "*": "multiply"
+  }
+  console.log(event.key);
+  if (!isNaN(event.key) && event.key !== " ") {
+    document.querySelector("#digit-" + event.key).click();
+  }
+  if (event.key in getOperator) {
+    document.querySelector("#" + getOperator[event.key]).click();
+  }
+  if (event.key === "=" || event.key === "Enter") {
+    document.querySelector(".equal").click();
+  }
+  if (event.key === ".") {
+    document.querySelector(".decimal").click();
+  }
+  if (event.key === "Backspace") {
+    document.querySelector(".clear").click();
+  }
+})
+
+
+//error message when dividing by zero
+//nice looks
+//backspace button
+//keyboard support
+//long decimals
