@@ -132,7 +132,7 @@ buttons.forEach(button => {
 document.addEventListener("keydown", function handleKeyPress(event) {
   const getOperator = {
     "%": "remainder",
-    "÷": "divide",
+    "/": "divide",
     "+": "add",
     "-": "subtract",
     "*": "multiply"
@@ -159,5 +159,4 @@ document.addEventListener("keydown", function handleKeyPress(event) {
 //error message when dividing by zero
 //nice looks
 //backspace button
-//keyboard support
 //long decimals

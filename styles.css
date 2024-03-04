@@ -33,15 +33,37 @@ button {
   border-style: none;
 }
 
+.digit:hover,
+.decimal:hover {
+  background-color: lightgrey;
+}
+
+.operator:hover {
+  background-color: orange;
+}
+
+.equal:hover {
+  background-color: green;
+}
+
+.all-clear:hover,
+.clear:hover {
+  background-color: red;
+}
+
 button.equal {
   width: 128px;
   border-radius: 60px;
 }
 
 .display {
+  display: block;
   height: 60px;
   width: 256px;
   border-radius: 10px;
+  background-color: lightgrey;
   text-align: right;
   margin: 16px;
+  font-size: 40px;
+  padding: 10px;
 }
