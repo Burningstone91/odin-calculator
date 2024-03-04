@@ -57,32 +57,38 @@ buttons.forEach(button => {
 
     if (keyType === "operator") {
       if (num2 !== null) {
-        display.value = operate(Number(num1), Number(num2), operator);
+        result = operate(Number(num1), Number(num2), operator);
+        display.value = result + " " + keyValue + " ";
+        num1 = result;
+        num2 = null;
       } else {
-        switch (keyValue) {
-          case "%":
-            operator = remainder;
-            break;
-          case "÷":
-            operator = divide;
-            break;
-          case "+":
-            operator = add;
-            break;
-          case "-":
-            operator = subtract;
-            break;
-          case "x":
-            operator = multiply;
-            break;
+        display.value += " " + keyValue + " ";
+      }
+
+      switch (keyValue) {
+        case "%":
+          operator = remainder;
+          break;
+        case "÷":
+          operator = divide;
+          break;
+        case "+":
+          operator = add;
+          break;
+        case "-":
+          operator = subtract;
+          break;
+        case "x":
+          operator = multiply;
+          break;
         }
 
-        display.value += keyValue;
-        prevKeyType = "operator";
-      }
+      prevKeyType = "operator";
     }
 
-
+  console.log(num1);
+  console.log(num2);
+  console.log(prevKeyType)
   })
 })
 
