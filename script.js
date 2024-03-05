@@ -5,28 +5,37 @@ let prevKeyType = null;
 const buttons = document.querySelectorAll("button");
 const display = document.querySelector(".display");
 
-function add(num1, num2) {
-  return num1 + num2;
+function add(a, b) {
+  return a + b;
 }
 
-function subtract(num1, num2) {
-  return num1 - num2;
+function subtract(a, b) {
+  return a - b;
 }
 
-function multiply(num1, num2) {
-  return num1 * num2;
+function multiply(a, b) {
+  return a * b;
 }
 
-function divide(num1, num2) {
-  return num1 / num2;
+function divide(a, b) {
+  return a / b;
 }
 
-function remainder(num1, num2) {
-  return num1 % num2;
+function remainder(a, b) {
+  return a % b;
 }
 
-function operate(num1, num2, operator) {
-  return operator(num1, num2)
+function operate(a, b, operator) {
+  if (b === 0 && operator === divide) {
+    alert("You just destroyed the universe by dividing by zero!");
+    document.querySelector(".all-clear").click();
+    return "Error";
+  } else {
+    result = operator(a, b);
+    num1 = result;
+    num2 = null;
+    return result;
+  }
 }
 
 function operatorStringToFunction(operatorString) {
@@ -54,8 +63,7 @@ buttons.forEach(button => {
   button.addEventListener("click", function handleClick(event) {
     const key = event.target;
     const keyValue = key.textContent;
-    const keyType = key.className;
-
+    const keyType = key.className; 
 
     if (keyType === "digit") {
       if (prevKeyType === null){
@@ -78,13 +86,11 @@ buttons.forEach(button => {
     if (keyType === "operator") {
       if (num2 !== null) {
         result = operate(Number(num1), Number(num2), operator);
-        display.value = result + " " + keyValue + " ";
-        num1 = result;
-        num2 = null;
+        if (result !== "Error") display.value = result + " " + keyValue + " ";
       } else if (prevKeyType !== "operator"){
-        operatorStringToFunction(keyValue);
         display.value += " " + keyValue + " ";
       }
+      operatorStringToFunction(keyValue);
       prevKeyType = "operator";
     }
 
@@ -103,9 +109,7 @@ buttons.forEach(button => {
         alert("You are missing a number or an operator!")
       } else {
         result = operate(Number(num1), Number(num2), operator);
-        display.value = result;
-        num1 = result;
-        num2 = null;
+        if (result !== "Error") display.value = result;
       }
     }
 
@@ -133,7 +137,6 @@ buttons.forEach(button => {
       }
       prevKeyType = "clear";
     }
-
   })
 })
 
@@ -164,6 +167,4 @@ document.addEventListener("keydown", function handleKeyPress(event) {
   }
 })
 
-
-//error message when dividing by zero
-//long decimals
+//error message when dividing by zero 
