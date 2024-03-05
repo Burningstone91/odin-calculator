@@ -81,16 +81,10 @@ buttons.forEach(button => {
         display.value = result + " " + keyValue + " ";
         num1 = result;
         num2 = null;
-      } else {
-        // Remove operator if previous button was an operator
-        if (prevKeyType === "operator") {
-          display.value = display.value.substring(0, display.value.length - 3);
-        }
-
+      } else if (prevKeyType !== "operator"){
+        operatorStringToFunction(keyValue);
         display.value += " " + keyValue + " ";
       }
-
-      operatorStringToFunction(keyValue);
       prevKeyType = "operator";
     }
 
@@ -125,10 +119,25 @@ buttons.forEach(button => {
         num2 += keyValue;
       }
     }
+
+
+    if (keyType === "clear") {
+      if (display.value.slice(-1) === " ") {
+        display.value = display.value.substring(0, display.value.length - 3);
+      } else if (num2 === null) {
+        num1 = num1.slice(0, -1);
+        display.value = display.value.slice(0, -1);
+      } else if (num1 !== null) {
+        num2 = num2.slice(0, -1);
+        display.value = display.value.slice(0, -1);
+      }
+      prevKeyType = "clear";
+    }
+
   })
 })
 
-
+// Keyboard support
 document.addEventListener("keydown", function handleKeyPress(event) {
   const getOperator = {
     "%": "remainder",
@@ -137,7 +146,7 @@ document.addEventListener("keydown", function handleKeyPress(event) {
     "-": "subtract",
     "*": "multiply"
   }
-  console.log(event.key);
+
   if (!isNaN(event.key) && event.key !== " ") {
     document.querySelector("#digit-" + event.key).click();
   }
@@ -157,6 +166,4 @@ document.addEventListener("keydown", function handleKeyPress(event) {
 
 
 //error message when dividing by zero
-//nice looks
-//backspace button
 //long decimals
